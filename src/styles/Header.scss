@@ -1,0 +1,14 @@
+.logo-container{
+    display: flex;
+    justify-content: center;
+    img{
+        width: 15em;
+    }
+}
+
+/* @media (min-width: 1000px){
+    .logo-container{
+        justify-content: flex-end;
+    }
+}
+ */

@@ -1,0 +1,12 @@
+$purple: #5F2F8B;
+.link{
+    text-decoration: none;
+    .link-text{
+        text-align: center;
+        color: $purple;
+    }
+}
+
+.link:hover{
+    text-decoration: underline;
+}

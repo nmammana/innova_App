@@ -1,0 +1,13 @@
+$purple: #5F2F8B;
+
+.categories-table{
+    margin: 0 auto;
+    .category-item{
+        list-style: none;
+    }
+}
+
+.button{
+    border-radius: 6px;
+    color: $purple;
+}

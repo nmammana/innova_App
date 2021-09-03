@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import { FirebaseAppProvider } from 'reactfire';
+import FirebaseConfig from './components/FirebaseConfig';
+import App from './components/App'
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import { ChakraProvider } from "@chakra-ui/react"
+
+
+ReactDOM.render((
+    <FirebaseAppProvider firebaseConfig={FirebaseConfig}>
+        <ChakraProvider>
+            <Suspense fallback={'Conectando la app...'}>
+                <App />
+            </Suspense>
+        </ChakraProvider>
+    </FirebaseAppProvider>
+    ), document.getElementById('root'));
+
+
