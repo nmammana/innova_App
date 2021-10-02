@@ -8,7 +8,13 @@ $heading3: normal bold 1.3rem/1.4rem 'Poppins', sans-serif;
 $body1: normal normal 0.8rem/1.6rem 'Poppins', sans-serif;
 $form: normal normal 0.8rem/1.6rem 'Poppins', sans-serif;
 $error-font: normal bold 1.8rem/2.2rem 'Poppins', sans-serif;
- 
+$nav-font: normal normal 0.8rem/1.3rem 'Poppins', sans-serif;
+
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$gray: #E5E5E5;
+
 .heading1{
     font: $heading1;
 }
@@ -26,4 +32,19 @@ $error-font: normal bold 1.8rem/2.2rem 'Poppins', sans-serif;
 }
 .error-font{
     font: $error-font;
+}
+.nav-font{
+    font: $nav-font;
+}
+.title{
+    padding: 1em 0;
+    text-align: center;
+    color: $middle-purple;
+}
+input.chakra-input{
+    font: $form;
+}
+
+select.chakra-select{
+    font: $form;
 }

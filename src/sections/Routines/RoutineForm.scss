@@ -1,0 +1,45 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$warm-black: #201E1C;
+$warm-black2: #282623;
+$dark-gray: #433F3F;
+$gray2: #5A5555;
+$light-gray: #BAB6B6;
+$gray: #E5E5E5;
+
+form{
+    .user-prev-card{
+        
+        p{
+            padding: .3em 0;
+        }
+        .name{
+            font: normal 500 17px/20px 'Poppins', sans-serif;
+            color: $warm-black;
+        }  
+        .id-number{
+            font: normal normal 15px/18px 'Poppins', sans-serif;
+            color: $gray2;
+        }
+    }
+    .exercise-prev-card{
+        .exercise-info{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            .exercise-name{
+                font: normal 500 17px/20px 'Poppins', sans-serif;
+            }
+        }
+    }
+    .button-container{
+        display: flex;
+        flex-direction: row;
+        gap: .5em;
+        justify-content: end;
+    }
+    
+        
+}

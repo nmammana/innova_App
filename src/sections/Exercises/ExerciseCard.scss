@@ -1,0 +1,34 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$warm-black: #201E1C;
+$warm-black2: #282623;
+$dark-gray: #433F3F;
+$gray2: #5A5555;
+$light-gray: #BAB6B6;
+$gray: #E5E5E5;
+
+
+.exercise-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: .25em 0;
+    .data-container{
+        td{
+            padding: .5em 0;
+            color: $dark-gray;
+        }
+    }
+    
+    .tools{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+        td{
+            padding: 0;
+            color: $dark-gray;
+        }
+    }
+}

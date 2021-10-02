@@ -1,0 +1,27 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$warm-black: #201E1C;
+$warm-black2: #282623;
+$dark-gray: #433F3F;
+$gray2: #5A5555;
+$light-gray: #BAB6B6;
+$gray: #E5E5E5;
+
+.routine-day-card{
+    border-bottom: 2px solid $gray;
+    .heading{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .title{
+            font: normal 500 1rem/1.6rem 'Poppins', sans-serif;
+            //font: normal normal 0.8rem/1.6rem 'Poppins', sans-serif;
+        }
+        .delete-button{
+            background-color: transparent;
+            padding: 0 16px;
+        }
+    }
+}

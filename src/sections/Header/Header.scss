@@ -1,0 +1,25 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$gray: #E5E5E5;
+
+header{
+    .header-wrapper{
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .logo-container{
+            .logo{
+                img{
+                    width: 200px;
+                }
+            }
+        }
+        
+    }
+}
+

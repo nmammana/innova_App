@@ -1,0 +1,26 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$gray: #E5E5E5;
+
+.routines-main{
+    .routines-wrapper{
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1em;
+        .heading-container{
+            display: grid;
+            grid-template-columns: repeat(12,1fr);
+            align-items: center;
+            .back-link{
+                grid-column: 1/2;
+                justify-self: start;
+                text-decoration: none;
+                
+            }
+            .heading-title{
+                grid-column: 2/12;
+            }
+        }
+    }
+}

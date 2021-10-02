@@ -1,0 +1,36 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$warm-black: #201E1C;
+$warm-black2: #282623;
+$dark-gray: #433F3F;
+$gray2: #5A5555;
+$light-gray: #BAB6B6;
+$gray: #E5E5E5;
+
+.user-data{
+    p{
+        padding: .3em 0;
+    }
+    .name{
+        font: normal 500 17px/20px 'Poppins', sans-serif;
+        color: $warm-black;
+    }
+    .age{
+        font: normal normal 15px/18px 'Poppins', sans-serif;
+        color: $gray2;
+    }
+    .id-number{
+        font: normal normal 15px/18px 'Poppins', sans-serif;
+        color: $gray2;
+    }
+    .personal-data{
+        font: normal normal 15px/18px 'Poppins', sans-serif;
+        color: $gray2;
+    }
+}
+.routine-description{
+    padding: .3em 0;
+    font: normal normal 15px/18px 'Poppins', sans-serif;
+    color: $gray2;
+}

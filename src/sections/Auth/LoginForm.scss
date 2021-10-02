@@ -1,0 +1,16 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$gray: #E5E5E5;
+
+main{
+    .login-wrapper{
+        max-width: 1200px;
+        margin: 0 auto;
+        .login-form{
+            .error-message{
+                color: $middle-purple;
+            }
+        }
+    }
+}

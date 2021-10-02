@@ -1,0 +1,21 @@
+.exercises-list{
+    .toolbar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1em;
+        padding: .4em 0;
+    }
+}
+
+
+@media (max-width: 600px){
+    .exercises-list{
+        .toolbar{
+            .select-bar.chakra-select::placeholder{
+                color: transparent;
+            }
+        }
+    }
+}

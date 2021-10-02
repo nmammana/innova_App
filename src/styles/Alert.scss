@@ -1,0 +1,21 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$gray: #E5E5E5;
+
+.alert-header.css-9fgtzh{
+    color: $middle-purple;
+}
+
+.alert-buttons-container.css-k0waxj{
+    gap: 0.5em;
+    button{
+        background: transparent;
+        box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+        color: $middle-purple;
+    }
+    button:hover{
+        background-color: $light-purple;
+        color: $gray;
+    }
+}

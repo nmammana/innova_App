@@ -1,0 +1,43 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$gray: #E5E5E5;
+
+.admin-home{
+    .admin-home__wrapper{
+        max-width: 1200px;
+        margin: 0 auto;
+        
+        .admin-home__cards{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1em;
+            .card{
+                text-decoration: none;
+                width: 100%;
+                max-width: 800px;
+                height: 150px;
+                
+                margin: .5em;
+                padding: 1em;
+                transition: background-color .3s;
+                box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+                border-radius: 6px;     
+                display: flex;
+                align-items: center;
+                justify-content: center;       
+                .text{
+                    color: $middle-purple;
+                }
+            }
+            .card:hover{
+                background: $light-purple;
+                .text{
+                    color: $gray;
+                }
+            }
+        }
+    }
+}
