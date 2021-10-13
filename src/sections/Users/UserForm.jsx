@@ -62,7 +62,8 @@ export default function UserForm({user, onClose}) {
 
     const createUser = async () =>{
         try{
-            const {id: userId} = await db.collection('users').add({
+            db.collection("users").doc(form.identityNumber).set({
+            //const {id: userId} = await db.collection('users').add({
                 name: capitalize(form.name),
                 email : form.email,
                 identityNumber : form.identityNumber,
@@ -76,10 +77,9 @@ export default function UserForm({user, onClose}) {
                     identityNumber : form.identityNumber,
                     birth: form.birth,
                     comments: capitalize(form.comments),
-                    id: userId
+                    id: form.identityNumber
                 }];
             setUsers(usersListUpdated);
-            console.log('Usuario añadido con exito!');
         }catch(error){
             console.error('Error adding user:',error);
         }
@@ -110,7 +110,6 @@ export default function UserForm({user, onClose}) {
                 }
             })
             setUsers(usersListUpdated); 
-            console.log('Usuario modificado con exito!')
         }catch(error){
             console.error('Error modifying user:',error);
         }
@@ -160,7 +159,7 @@ export default function UserForm({user, onClose}) {
                 </Textarea>
             </div>          
             
-            <Box className="button-center">
+            <Box className="button-container">
                     {id ? (
                         <Button className="button" variant="solid" 
                                 size="sm" type= "submit" disabled={!form.name}>

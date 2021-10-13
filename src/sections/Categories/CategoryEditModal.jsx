@@ -13,14 +13,10 @@ import {
     ModalCloseButton,
     useDisclosure,
     IconButton,
-    FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
     Flex,
     Box,
-    Spacer,
 } from "@chakra-ui/react"
 
 import '../../assets/icons/coolicons.scss'
@@ -47,26 +43,27 @@ export default function EditCategoryModal({name, id, editCategory}) {
                 <ModalCloseButton className="button" />
                 <ModalBody >
                     <form className="form">
-                        <FormLabel>Ingrese el nuevo nombre:</FormLabel>
-                        <Input  type= "text" className= "form-input form-font" name="category" /* placeholder={name} */
-                                onChange={(e) => setNewCategoryName(e.target.value)} value={newCategoryName}></Input>
+                        <div className="input-container">
+                            <FormLabel className="form-font form-label">Ingrese el nuevo nombre:</FormLabel>
+                            <Input  type= "text" className= "form-input form-font" name="category"
+                                    onChange={(e) => setNewCategoryName(e.target.value)} value={newCategoryName}></Input>
+                        </div>
                     </form>
                 </ModalBody> 
         
                 <ModalFooter>
-                    <Flex>
-                        <Box className="button-center">
-                            <Button className="button" variant="solid" colorScheme="#5F2F8B" color="#5F2F8B"
-                                    borderRadius="6px" size="sm" onClick={() => {editCategory(id, newCategoryName); onClose()}}>
+                    
+                        <div className="button-container">
+                            <Button className="button" variant="solid" size="sm"
+                                    onClick={() => {editCategory(id, newCategoryName); onClose()}}>
                                 Guardar cambios
                             </Button>
                         
-                            <Button className="button" variant="solid" colorScheme="#5F2F8B" color="#5F2F8B"
-                                    borderRadius="6px" size="sm" onClick={onClose}>
+                            <Button className="button" variant="solid" size="sm" onClick={onClose}>
                                 Cerrar
                             </Button>
-                        </Box>
-                    </Flex>
+                        </div>
+                   
                 </ModalFooter>
             </ModalContent>
         </Modal>

@@ -1,13 +1,23 @@
 $purple: #5F2F8B;
 
+.notfound-main{
+    .notfound-main__wrapper{
+        .heading-container{
+            .heading-title{
+                padding: .5em;
+            }
+        }
+        .notfound-img{
+            .img-container{
+                display: flex;
+                justify-content: center;
+                img{
+                    width: 35%;
+                }
+            }
+        }
+    }
+}
 
-.error-title{
-    text-align: center;
-    color: $purple;
-    margin: 0;
-    padding: 0.8em 0;
-}
-.img-container{
-    display: flex;
-    justify-content: center;
-}
+
+

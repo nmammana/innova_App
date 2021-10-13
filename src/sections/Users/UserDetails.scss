@@ -8,14 +8,14 @@ $gray2: #5A5555;
 $light-gray: #BAB6B6;
 $gray: #E5E5E5;
 
-.link{
-    text-decoration: none;
-    .link-text{
-        text-align: center;
-        color: $middle-purple;
-    }
-}
 
-.link:hover{
-    text-decoration: underline;
+.user-data{
+    p{
+        font: normal normal 18px/20px 'Poppins', sans-serif;
+        color: $gray2;
+        padding: .3em 0;
+    }
+    .email{
+        font-weight: 500;
+    }
 }

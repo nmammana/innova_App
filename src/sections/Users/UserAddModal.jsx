@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import {
     Button,
@@ -18,10 +18,12 @@ import {
 } from "@chakra-ui/react"
 import '../../assets/icons/coolicons.scss'
 import UserForm from './UserForm'
+import { UsersContext } from '../../contexts/UsersContext';
 
 
 
 export default function AddUserModal() {
+    const {isLoadingUsers} = useContext(UsersContext);
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
@@ -29,7 +31,8 @@ export default function AddUserModal() {
             <IconButton
                     m="7.2px 0" className="form-input icon-button"
                     onClick={onOpen}
-                    icon={<i className="ci-plus_circle_outline"></i>}/>
+                    icon={<i className="ci-plus_circle_outline"></i>}
+                    disabled={isLoadingUsers}/>
 
             <Modal isOpen={isOpen} onClose={onClose} size="lg">
                 <ModalOverlay />

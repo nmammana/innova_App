@@ -17,10 +17,11 @@ import {
   } from "@chakra-ui/react"
 import { UsersContext } from '../../contexts/UsersContext';
 import UserCard from './UserCard';
+import Loading from '../../components/Loading/Loading';
 
 export default function UsersList() {
     const db = firebase.firestore();
-    const {users, setUsers, IsLoadingUsers, setIsLoadingUsers} = useContext(UsersContext);
+    const {users, setUsers, isLoadingUsers, setIsLoadingUsers} = useContext(UsersContext);
     const [searchFilter, setSearchFilter] = useState('');
 
     const deleteUser = async (userDeleted) =>{
@@ -44,29 +45,35 @@ export default function UsersList() {
                         <UserAddModal/>     
                 </div>
             }
-            <Table variant="simple" className="users-table">
-                {/* <Thead>
-                    <Tr>
-                        <Th>Nombre</Th>
-                        <Th>Correo</Th>
-                    </Tr>
-                </Thead> */}
-                <Tbody>
-                    {users.filter((user) => {
-                        if(searchFilter===""){
-                            return user;
-                        }else if(user.name.toLowerCase().includes(searchFilter.toLowerCase())){
-                            return user;
-                        }
-                    }).map((user)=>(
-                        <UserCard
-                            user={user}
-                            key={user.id}
-                            deleteUser={deleteUser}
-                        />
-                    ))}
-                </Tbody>
-            </Table>
+            {users && 
+                <Table variant="simple" className="users-table">
+                    {/* <Thead>
+                        <Tr>
+                            <Th>Nombre</Th>
+                            <Th>Correo</Th>
+                        </Tr>
+                    </Thead> */}
+                    <Tbody>
+                        {users.filter((user) => {
+                            if(searchFilter===""){
+                                return user;
+                            }else if(user.name.toLowerCase().includes(searchFilter.toLowerCase())){
+                                return user;
+                            }
+                        }).map((user)=>(
+                            <UserCard
+                                user={user}
+                                key={user.id}
+                                deleteUser={deleteUser}
+                            />
+                        ))}
+                    </Tbody>
+                </Table>
+            }
+            {isLoadingUsers && <Loading/>}
+            {!isLoadingUsers && users?.length===0 && 
+                <p className="message body1">Aún no hay usuarios registrados...</p>
+            }
         </section>
     )
 }

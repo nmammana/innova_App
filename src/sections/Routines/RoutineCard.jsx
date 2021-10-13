@@ -1,27 +1,40 @@
 import React from 'react'
-import RoutineDetails from './RoutineDetails';
 import {Tr, Td} from "@chakra-ui/react"
 import RoutineEditModal from './RoutineEditModal';
 import RoutineDeleteAlert from './RoutineDeleteAlert';
-import RoutineShareAlert from './RoutineShareAlert'
 import './RoutineCard.scss';
+import { Link } from 'react-router-dom'
 
+import { IconButton,} from "@chakra-ui/react"
+import { withRouter } from 'react-router'
 
-export default function RoutineCard({routine, deleteRoutine}) {
+ function RoutineCard({routine, deleteRoutine}) {
 
-    const {title, user, comments, days, id} = routine;
+    const {title, user} = routine;
     return (
+        
         <Tr className="routine-row"> 
-            <div className="data-container">
-                <Td>{title} - {user.name}</Td>
-            </div>
+            <Td className="data-container">
+                <p>{title} - {user.name}</p>
+            </Td>
             
-            <div className="tools">
-                <Td><RoutineDetails routine={routine}/></Td>
-                <Td><RoutineEditModal routine={routine}/></Td>
-                <Td><RoutineDeleteAlert deleteRoutine={deleteRoutine} routine={routine}/></Td>
-                {/* <Td><RoutineShareAlert routine={routine}/></Td> */}
-            </div>
+            <Td className="tools">
+                <Link  to={{
+                        pathname: `/routines/${routine.id}`, 
+                        state: {routine}
+                    }}>
+                        <IconButton 
+                            className="icon-button"
+                            icon={<i className="ci-more_horizontal"></i>}/>
+                </Link>
+                <RoutineEditModal routine={routine}/>
+                <RoutineDeleteAlert deleteRoutine={deleteRoutine} routine={routine}/>
+                {/* <RoutineShareAlert routine={routine}/> */}
+            </Td>
         </Tr>
+            
+       
     )
 }
+
+export default withRouter(RoutineCard);

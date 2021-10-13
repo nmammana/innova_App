@@ -48,24 +48,21 @@ export default function VideoModal({name,video}) {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader className="heading2" color="#5F2F8B">{name}</ModalHeader>
+                    <ModalHeader className="heading2 title">{name}</ModalHeader>
                     <ModalCloseButton className="button" />
                     <ModalBody >
-                    <Box className= "video-container">
+                    <div className= "video-container">
                         <AspectRatio>
                             <iframe src={`https://www.youtube.com/embed/${videoId}`} style={{borderRadius: '6px'}} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         </AspectRatio>
-                    </Box>
+                    </div>
                     </ModalBody> 
-                    <ModalFooter>
-                        <Flex>
-                            <Box className="button-center">
-                                <Button className="button" variant="solid" colorScheme="#5F2F8B" color="#5F2F8B"
-                                        borderRadius="6px" size="sm" onClick={onClose}>
-                                    Cerrar
-                                </Button>
-                            </Box>
-                        </Flex>
+                    <ModalFooter>    
+                        <div className="button-container">
+                            <Button className="button" variant="solid" size="sm" onClick={onClose}>
+                                Cerrar
+                            </Button>
+                        </div>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

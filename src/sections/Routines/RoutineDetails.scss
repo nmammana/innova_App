@@ -8,29 +8,69 @@ $gray2: #5A5555;
 $light-gray: #BAB6B6;
 $gray: #E5E5E5;
 
-.user-data{
-    p{
-        padding: .3em 0;
-    }
-    .name{
-        font: normal 500 17px/20px 'Poppins', sans-serif;
-        color: $warm-black;
-    }
-    .age{
-        font: normal normal 15px/18px 'Poppins', sans-serif;
-        color: $gray2;
-    }
-    .id-number{
-        font: normal normal 15px/18px 'Poppins', sans-serif;
-        color: $gray2;
-    }
-    .personal-data{
-        font: normal normal 15px/18px 'Poppins', sans-serif;
-        color: $gray2;
+
+.routine-details{
+    .routine-details__wrapper{
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1em;
+        .heading-container{
+            display: grid;
+            grid-template-columns: repeat(12,1fr);
+            align-items: center;
+            .back-link{
+                grid-column: 1/2;
+                justify-self: start;
+                text-decoration: none;
+                
+            }
+            .heading-title{
+                grid-column: 2/12;
+                .heading__hide{
+                    display: none;
+                }
+            }
+        }
+        .user-data{
+            p{
+                padding: .3em 0;
+            }
+            .name{
+                font: normal 500 20px/20px 'Poppins', sans-serif;
+                color: $warm-black;
+            }
+            .age{
+                font: normal normal 15px/18px 'Poppins', sans-serif;
+                color: $gray2;
+            }
+            .id-number{
+                font: normal normal 15px/18px 'Poppins', sans-serif;
+                color: $gray2;
+            }
+            .personal-data{
+                font: normal normal 15px/18px 'Poppins', sans-serif;
+                color: $gray2;
+            }
+            .routine-description{
+                padding: .3em 0;
+                font: normal normal 15px/18px 'Poppins', sans-serif;
+                color: $gray2;
+            }
+        }
     }
 }
-.routine-description{
-    padding: .3em 0;
-    font: normal normal 15px/18px 'Poppins', sans-serif;
-    color: $gray2;
+
+@media (min-width: 600px){
+    .routine-details{
+        .routine-details__wrapper{
+            .heading-container{
+                .heading-title{  
+                    .heading__hide{
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
 }
+

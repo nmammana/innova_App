@@ -14,10 +14,15 @@ import {
 import { RoutinesContext } from '../../contexts/RoutinesContext';
 import RoutineAddModal from './RoutineAddModal';
 import RoutineCard from './RoutineCard';
+import Loading from '../../components/Loading/Loading';
+import { UsersContext } from '../../contexts/UsersContext';
+import { CategoriesContext } from '../../contexts/CategoriesContext';
+import { ExercisesContext } from '../../contexts/ExercisesContext';
 
 export default function RoutinesList() {
     const db = firebase.firestore();
     const {routines, setRoutines, isLoadingRoutines, setIsLoadingRoutines} = useContext(RoutinesContext);
+    
     const [searchFilter, setSearchFilter] = useState('');
 
     const deleteRoutine = async (routineDeleted) =>{
@@ -42,30 +47,37 @@ export default function RoutinesList() {
                 </div>
             }
             
-            <Table variant="simple">
-                {/* <Thead>
-                    <Tr>
-                        <Th>Titulo</Th>
-                        <Th>Nombre</Th>
-                    </Tr>
-                </Thead> */}
-                <Tbody>
-                    {routines.filter((routine) => {
-                        if(searchFilter===""){
-                            return routine;
-                        }else if(routine.user.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
-                            routine.title.toLowerCase().includes(searchFilter.toLowerCase())){
-                            return routine;
-                        }
-                    }).map((routine)=>(
-                        <RoutineCard
-                            routine={routine}
-                            key={routine.id}
-                            deleteRoutine={deleteRoutine}
-                        />
-                    ))}
-                </Tbody>
-            </Table>
+            {
+                <Table variant="simple">
+                    {/* <Thead>
+                        <Tr>
+                            <Th>Titulo</Th>
+                            <Th>Nombre</Th>
+                        </Tr>
+                    </Thead> */}
+                    <Tbody>
+                        {routines.filter((routine) => {
+                            if(searchFilter===""){
+                                return routine;
+                            }else if(routine.user.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+                                routine.title.toLowerCase().includes(searchFilter.toLowerCase())){
+                                return routine;
+                            }
+                        }).map((routine)=>(
+                            <RoutineCard
+                                routine={routine}
+                                key={routine.id}
+                                deleteRoutine={deleteRoutine}
+                            />
+                        ))}
+                    </Tbody>
+                </Table>
+            }
+            {isLoadingRoutines && <Loading/>}
+            {!isLoadingRoutines && routines?.length===0 && 
+                <p className="message body1">Aún no hay rutinas registradas...</p>
+            }
+
         </section>
     )
 }

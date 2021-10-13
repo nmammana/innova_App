@@ -1,3 +1,13 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$warm-black: #201E1C;
+$warm-black2: #282623;
+$dark-gray: #433F3F;
+$gray2: #5A5555;
+$light-gray: #BAB6B6;
+$gray: #E5E5E5;
+
 .routines-list{
     .toolbar{
         display: flex;
@@ -9,5 +19,9 @@
         .searchbar{
             max-width: 500px;
         }
+    }
+    .message{
+        padding: 1em 0;
+        color: $dark-gray;
     }
 }

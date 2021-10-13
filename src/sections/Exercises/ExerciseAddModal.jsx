@@ -1,34 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import {
-    Button,
-    IconButton,
-
-    
+    IconButton,    
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    Flex,
-    Box,
 } from "@chakra-ui/react"
 import '../../assets/icons/coolicons.scss';
 
 import ExerciseForm from './ExerciseForm';
+import { ExercisesContext } from '../../contexts/ExercisesContext';
 
 export default function AddExerciseModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const {isLoadingExercises} = useContext(ExercisesContext);
 
     return (
         <>
             <IconButton 
                     m="7.2px 0" className="form-input icon-button"
                     onClick={onOpen}
-                    icon={<i className="ci-plus_circle_outline"></i>}/>
+                    icon={<i className="ci-plus_circle_outline"></i>}
+                    disabled={isLoadingExercises}/>
 
             <Modal isOpen={isOpen} onClose={onClose} size="lg">
                 <ModalOverlay />

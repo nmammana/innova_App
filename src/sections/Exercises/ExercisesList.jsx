@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ExerciseCard from './ExerciseCard'
 import Loading from '../../components/Loading/Loading';
 import firebase from 'firebase';
 import './ExercisesList.scss'
 import {    Select,
             Table,
-            Thead,
             Tbody,
-            Tr,
-            Th,
             Input, 
-            Box,
 } from "@chakra-ui/react"
 import { ExercisesContext } from '../../contexts/ExercisesContext';
 import ExerciseAddModal from './ExerciseAddModal';
@@ -45,6 +41,7 @@ export default function ExerciseList() {
         <section className="exercises-list">  
             {categories &&
                     <div className="toolbar">
+                        <div className="toolbar__primary">
                             <Select placeholder="Elija una categoría" className="form-input form-font select-bar" 
                                     name="category"  onChange={(e)=>setCategoryFilter(e.target.value)}
                                     disabled={categories?.length === 0}>
@@ -52,11 +49,13 @@ export default function ExerciseList() {
                                     <option key={category.id} value={category.name}>{category.name}</option>
                                 ))}
                             </Select>
-                        
+                        </div>
+                        <div className="toolbar__secondary">
                             <Input  type= "text" className= "form-input form-font search-bar" name = "name" 
                                     placeholder="Busque un ejercicio..." onChange={(e)=>setSearchFilter(e.target.value)} value={searchFilter}></Input>
                         
                             <ExerciseAddModal/>
+                        </div>
                     </div>
             }
             
@@ -91,8 +90,11 @@ export default function ExerciseList() {
                 </Table>
             }
             {isLoadingExercises && <Loading/>}
+            {!isLoadingExercises && exercises?.length===0 &&
+                <p className="message body1">Aún no hay ejercicios registrados...</p>
+            }
             {exercises?.length===0 && categoryFilter && 
-                <p className="body1">Aún no hay ejercicios en esta categoría</p>
+                <p className="message body1">Aún no hay ejercicios en esta categoría</p>
             }  
         </section>
     )

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import firebase from 'firebase';
 import Loading from '../../components/Loading/Loading';
 
@@ -29,9 +29,10 @@ import {
 import CategoryEditModal from './CategoryEditModal';
 import CategoryAddModal from './CategoryAddModal';
 import { CategoriesContext } from '../../contexts/CategoriesContext';
+import CategoryDeleteAlert from './CategoryDeleteAlert';
 
 export default function Categories() {
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState({});
     const db = firebase.firestore();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const {categories, setCategories, isLoadingCategories, setIsLoadingCategories} = useContext(CategoriesContext);
@@ -58,7 +59,6 @@ export default function Categories() {
         }
         setCategory("");
         setIsLoadingCategories(false);
-        console.log('category created')
     }
 
     const editCategory = async(id, newCategoryName) => {
@@ -78,7 +78,6 @@ export default function Categories() {
                 categoriesListUpdated.push(category);
             }
         })
-        console.log(categoriesListUpdated)
         setCategories(categoriesListUpdated); 
         setIsLoadingCategories(false);
     }
@@ -109,41 +108,44 @@ export default function Categories() {
                                             color="#5F2F8B" borderRadius="6px"/>
                         
                         <ModalBody>
-                            <Container>
-                                <Table className="categories-table" variant="simple">                           
-                                    <Tbody>
-                                    {categories.map((category) => (
-                                        <Tr className="category-item" key={category.id}>
-                                            <Td className="heading3" color="#5F2F8B">{category.name}</Td> 
-                                            <Td>
-                                                <CategoryEditModal 
-                                                    name = {category.name}
-                                                    id = {category.id}
-                                                    editCategory = {editCategory}
-                                                />
-                                            </Td>
-                                            <Td>
-                                                <IconButton onClick={()=>deleteCategory(category)} 
-                                                            icon={<i className="ci-trash_empty"></i>}/>                                             
-                                            </Td>  
-                                        </Tr>
-                                    ))}
-                                    </Tbody>
-                                </Table>
-                            </Container>
+                            <Table className="categories-table" variant="simple">                           
+                                <Tbody>
+                                {categories.map((category) => (
+                                    <Tr className="category-item" key={category.id}>
+                                        <Td className="heading3" color="#5F2F8B">{category.name}</Td> 
+                                        <Td>
+                                            <CategoryEditModal 
+                                                name = {category.name}
+                                                id = {category.id}
+                                                editCategory = {editCategory}
+                                            />
+                                        </Td>
+                                        <Td>
+                                            <CategoryDeleteAlert 
+                                                category={category}
+                                                deleteCategory={deleteCategory}    
+                                            />                                             
+                                        </Td>  
+                                    </Tr>
+                                ))}
+                                </Tbody>
+                            </Table>
+                            {!isLoadingCategories && categories?.length === 0 && 
+                                <p className="message body1">Aún no hay categorías registradas...</p>
+                            }
                         </ModalBody>
                         {isLoadingCategories && <Loading/>}
                         <ModalFooter>
-                            <Box className="button-center">
+                            <div className="button-container">
                                 <CategoryAddModal
                                     handleChange = {handleChange}
                                     category = {category}
                                     createCategory = {createCategory}
                                 />
                                 
-                                <Button className= "button" variant="solid" colorScheme="#5F2F8B" color="#5F2F8B"
-                                        borderRadius="6px" size="sm" onClick={onClose}>Cerrar</Button>
-                            </Box>
+                                <Button className= "button" variant="solid"
+                                        size="sm" onClick={onClose}>Cerrar</Button>
+                            </div>
                         </ModalFooter>
                     </ModalContent>
                 </Modal>

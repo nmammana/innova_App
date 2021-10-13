@@ -5,11 +5,7 @@ import {
     FormLabel,
     Input,
     Button,
-    Flex,
-    Box,
-    ModalFooter,
     Textarea,
-    IconButton,
 } from "@chakra-ui/react"
 import firebase from 'firebase'
 import { ExercisesContext } from '../../contexts/ExercisesContext';
@@ -28,7 +24,10 @@ export default function RoutineForm({onClose, routine}) {
     const {users} = useContext(UsersContext);
     const {exercises} = useContext(ExercisesContext);
     const {categories} = useContext(CategoriesContext);
-    const {routines, setRoutines} = useContext(RoutinesContext);
+    const {routines, setRoutines, isLoadingRoutines, setIsLoadingRoutines} = useContext(RoutinesContext);
+    const {isLoadingUsers} = useContext(UsersContext);
+    const {isLoadingCategories} = useContext(CategoriesContext);
+    const {isLoadingExercises} = useContext(ExercisesContext);
 
     const [form, setForm] = useState({
         title: "",
@@ -59,8 +58,6 @@ export default function RoutineForm({onClose, routine}) {
         dayName:"",
         exercises:[],
     })
-
-    const [isLoading, setIsLoading] = useState(false);
     const [categoriesOptions, setCategoriesOptions] = useState([]);
     const [usersOptions, setUsersOptions] = useState([]);
     const [exercisesOptions, setExercisesOptions] = useState([]);
@@ -105,7 +102,6 @@ export default function RoutineForm({onClose, routine}) {
             }
         }else if(e.label){
             if(action.name === 'user'){
-                console.log(e.value);
                 users.filter((user) => {
                     if(user.name.toLowerCase().includes(e.label.toLowerCase())){
                         setForm({...form, [action.name]: user});
@@ -142,8 +138,6 @@ export default function RoutineForm({onClose, routine}) {
         } */else{
             setForm({...form, [e.target.name]: e.target.value});
         }
-
-        console.log('form', form);
     }
 
     const addExerciseToDay = () => {
@@ -211,6 +205,7 @@ export default function RoutineForm({onClose, routine}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsLoadingRoutines(true);
         if(!id){ 
             createRoutine();
         }
@@ -218,7 +213,7 @@ export default function RoutineForm({onClose, routine}) {
             editRoutine();
         }
         onClose();
-        
+        setIsLoadingRoutines(false);
         setForm({
             title: "",
             user: {},
@@ -245,7 +240,6 @@ export default function RoutineForm({onClose, routine}) {
                     id: routineId,
                 }];
             setRoutines(routinesListUpdated);
-            console.log('Rutina añadida con exito!');
             
         }catch(error){
             console.error('Error adding routine:',error);
@@ -275,7 +269,6 @@ export default function RoutineForm({onClose, routine}) {
                 }
             })
             setRoutines(routinesListUpdated); 
-            console.log('Routine modified succesfull!')
         }catch(error){
             console.error('Error modifying routine:',error);
         }
@@ -311,7 +304,6 @@ export default function RoutineForm({onClose, routine}) {
         
         if(routine){
             setForm({...routine});
-            console.log('form user name ', routine.user.name)
             setUserValue({
                 label: routine.user.name,
                 value: routine.user.name.toLowerCase().replace(/\W/g, ''),
@@ -340,8 +332,8 @@ export default function RoutineForm({onClose, routine}) {
                 <Select 
                     placeholder="Elija un usuario..."
                     isClearable
-                    /* isDisabled={isLoading}
-                    isLoading={isLoading} */
+                    isDisabled={isLoadingUsers}
+                    isLoading={isLoadingUsers}
                     options={usersOptions}
                     onChange={(value, action)=>handleChange(value, action)} 
                     value={userValue}                
@@ -384,8 +376,8 @@ export default function RoutineForm({onClose, routine}) {
                 <Select 
                     placeholder="Elija una categoría..."
                     isClearable
-                    /* isDisabled={isLoading}
-                    isLoading={isLoading} */
+                    isDisabled={isLoadingCategories}
+                    isLoading={isLoadingCategories}
                     options={categoriesOptions}
                     onChange={(value,action)=>handleChange(value,action)} 
                     value={categoryValue}                
@@ -399,8 +391,8 @@ export default function RoutineForm({onClose, routine}) {
                 <Select 
                     placeholder="Elija un ejercicio..."
                     isClearable
-                    /* isDisabled={isLoading}
-                    isLoading={isLoading} */
+                    isDisabled={isLoadingExercises}
+                    isLoading={isLoadingExercises}
                     options={exercisesOptions}
                     onChange={(value,action)=>handleChange(value,action)}
                     value={exerciseValue}                

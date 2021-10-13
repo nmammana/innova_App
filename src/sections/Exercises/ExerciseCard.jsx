@@ -11,19 +11,19 @@ import ExerciseDeleteAlert from './ExerciseDeleteAlert';
 
 
 export default function ExerciseCard({exercise ,deleteExercise}) {
-    const {name, category, video, id} = exercise;
-    let videoId = "";
+    const {name, video} = exercise;
 
     return (
         <Tr className="exercise-row"> 
-            <div className="data-container">
-                <Td>{name}</Td>
-            </div>
-            <div className="tools">
-                <Td><ExerciseVideoModal name={name} video={video}/></Td>
-                <Td><ExerciseEditModal exercise={exercise}/></Td>
-                <Td><ExerciseDeleteAlert exercise={exercise} deleteExercise={deleteExercise}/></Td>
-            </div>
+            <Td className="data-container">
+                <p>{name}</p>
+            </Td>
+            
+            <Td className="tools">
+                <ExerciseVideoModal name={name} video={video}/>
+                <ExerciseEditModal exercise={exercise}/>
+                <ExerciseDeleteAlert exercise={exercise} deleteExercise={deleteExercise}/>
+            </Td> 
         </Tr>
     )
 }

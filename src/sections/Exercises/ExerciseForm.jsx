@@ -4,14 +4,13 @@ import Loading from '../../components/Loading/Loading'
 import firebase from 'firebase'
 import Creatable from 'react-select/creatable';
 
-import {    Select,
-            FormLabel,
-            Input,
-            Button,
-            Flex,
-            Box,
-            ModalFooter,
-        } from "@chakra-ui/react"
+import {   
+    FormLabel,
+    Input,
+    Button,
+    Flex,
+    Box,
+} from "@chakra-ui/react"
 import { ExercisesContext } from '../../contexts/ExercisesContext'
 import ExerciseVideoModal from './ExerciseVideoModal'
 import { CategoriesContext } from '../../contexts/CategoriesContext';
@@ -25,13 +24,13 @@ export default function ExerciseForm({onClose, exercise}) {
         category: "",
         video: "",
     })
-    const [isLoading, setIsLoading] = useState(false);
+    
     const db = firebase.firestore();
     const {categories, setCategories} = useContext(CategoriesContext);
     const { 
         exercises, 
-        setExercises,
-        isLoadingExercises, 
+        setExercises, 
+        isLoadingExercises,
         setIsLoadingExercises
     } = useContext(ExercisesContext);
     const [options, setOptions] = useState([]);
@@ -93,7 +92,6 @@ export default function ExerciseForm({onClose, exercise}) {
         }catch(error){
             console.error('Error adding new category: ',error);
         }
-        console.log('category created')
     }
 
     const handleSubmit = async (e) =>{
@@ -129,7 +127,6 @@ export default function ExerciseForm({onClose, exercise}) {
                     id: exerciseId
                 }];
             setExercises(exercisesListUpdated);
-            console.log('Ejercicio añadido con exito!');
         }catch(error){
             console.error('Error adding exercise:',error);
         }
@@ -156,7 +153,6 @@ export default function ExerciseForm({onClose, exercise}) {
                 }
             })
             setExercises(exercisesListUpdated); 
-            console.log('Ejercicio modificado con exito!')
         }catch(error){
             console.error('Error modifying exercise:',error);
         }
@@ -187,7 +183,7 @@ export default function ExerciseForm({onClose, exercise}) {
 
     return (
         <>
-            {isLoading && <Loading/>} 
+            {isLoadingExercises && <Loading/>} 
             <form 
                 className= "form"
                 onSubmit = {handleSubmit}>
@@ -203,8 +199,8 @@ export default function ExerciseForm({onClose, exercise}) {
                     <Creatable 
                         placeholder="Elija una categoría..."
                         isClearable
-                        isDisabled={isLoading}
-                        isLoading={isLoading}
+                        isDisabled={isLoadingExercises}
+                        isLoading={isLoadingExercises}
                         options={options}
                         onChange={(value)=>handleChange(value)} 
                         onCreateOption={handleCreate}
@@ -229,7 +225,7 @@ export default function ExerciseForm({onClose, exercise}) {
                     
                 }                  
                 
-                <Box className="button-center">
+                <div className="button-container">
                     {id ? (
                         <Button className="button" variant="solid" size="sm" 
                                 type="submit" disabled={!form.category} onClick={onClose}>
@@ -245,7 +241,7 @@ export default function ExerciseForm({onClose, exercise}) {
                                 onClick={onClose}>
                             Cerrar
                         </Button>
-                </Box>    
+                </div>    
                 
             </form>
         </>

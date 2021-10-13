@@ -12,9 +12,7 @@ import {
     useDisclosure,
     IconButton,
     AlertDialogCloseButton,
-    Button,
-    Box,
-    
+    Button,    
 } from "@chakra-ui/react"
 
 export default function RoutineDeleteAlert({deleteRoutine, routine}) {

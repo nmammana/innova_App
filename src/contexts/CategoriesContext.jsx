@@ -9,12 +9,13 @@ export default function CategoriesContextProvider({children}) {
     const [isLoadingCategories, setIsLoadingCategories] = useState(false);
 
     const updateCategories = async () => {
+        setIsLoadingCategories(true);
         const categories = await getFirebaseCategories();
         setCategories(categories);
+        setIsLoadingCategories(false);
     }
     
     useEffect(async() => {
-        console.log('Entra a use effect categoriesContext');
         await updateCategories();
     }, [])
 

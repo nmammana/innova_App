@@ -7,8 +7,6 @@ export default function UsersContextProvider({children}) {
     const [users, setUsers] = useState([]);
     const [isLoadingUsers, setIsLoadingUsers] = useState(false);
     
-    const [isLogged, setIsLogged] = useState(false);
-
     const updateUsers = async() => {
         setIsLoadingUsers(true);
         const users = await getFirebaseUsers();
@@ -21,7 +19,7 @@ export default function UsersContextProvider({children}) {
     }, [])
    
     return (
-        <UsersContext.Provider value={{users, setUsers, isLoadingUsers, setIsLoadingUsers ,isLogged, setIsLogged}}>
+        <UsersContext.Provider value={{users, setUsers, isLoadingUsers, setIsLoadingUsers}}>
             {children}
         </UsersContext.Provider>
     )

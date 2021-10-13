@@ -2,20 +2,14 @@ import React, { useContext } from 'react'
 
 import RoutineForm from './RoutineForm'
 import {
-    Button,
     IconButton,
-
-    
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    Flex,
-    Box,
 } from "@chakra-ui/react"
 import '../../assets/icons/coolicons.scss'
 import { RoutinesContext } from '../../contexts/RoutinesContext';

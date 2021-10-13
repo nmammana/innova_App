@@ -29,11 +29,11 @@ export default function LoginForm({handleChange, login, errorMessage, form}) {
                         <p className="body1 error-message">{errorMessage}</p>}
 
                     
-                    <Box className="button-center">
+                    <div className="button-center">
                         <Button className= "button" variant="solid" size="sm" type="submit" >
                             Iniciar sesión
                         </Button>    
-                    </Box>
+                    </div>
                                         
                 </form>
             </div>

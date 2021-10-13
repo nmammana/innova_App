@@ -1,21 +1,44 @@
+$dark-purple: #5F2F8B;
+$middle-purple: #804AB0;
+$light-purple: #9D70C6;
+$warm-black: #201E1C;
+$warm-black2: #282623;
+$dark-gray: #433F3F;
+$gray2: #5A5555;
+$light-gray: #BAB6B6;
+$gray: #E5E5E5;
+
 .exercises-list{
     .toolbar{
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        flex-direction: column;
+        align-content: center;
         justify-content: space-between;
         gap: 1em;
         padding: .4em 0;
+        .toolbar__primary{
+            width: 100%;
+        }
+        .toolbar__secondary{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1em;
+        }
+        
+    }
+    .message{
+        padding: 1em 0;
+        color: $dark-gray;
     }
 }
 
 
-@media (max-width: 600px){
+@media (min-width: 600px){
     .exercises-list{
         .toolbar{
-            .select-bar.chakra-select::placeholder{
-                color: transparent;
-            }
+            flex-direction: row;
         }
     }
 }

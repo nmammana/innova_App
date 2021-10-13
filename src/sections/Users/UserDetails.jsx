@@ -14,6 +14,8 @@ import {
     
 } from "@chakra-ui/react"
 
+import './UserDetails.scss';
+
 export default function UserDetails({user}) {
     const {name, email, identityNumber, birth, comments} = user;
     
@@ -31,17 +33,18 @@ export default function UserDetails({user}) {
             <Modal isOpen={isOpen} onClose={onClose} size="lg">
                 <ModalOverlay/>
                 <ModalContent>
-                    <ModalHeader className="heading2 title" color="#5F2F8B">{name}</ModalHeader>
+                    <ModalHeader className="heading2 title" >{name}</ModalHeader>
                     <ModalCloseButton className="button"/>
                     <ModalBody>
-                        <p>Correo: {email}</p>
-                        <p>DNI: {identityNumber}</p>  
-                        <p>Edad: {age} años.</p>
-                        <p>Información personal: {comments}</p>
+                        <div className="user-data">
+                            <p className="email">{email}</p>
+                            <p>DNI: {identityNumber}</p>  
+                            <p>Edad: {age} años.</p>
+                            <p>Información personal: {comments}</p>
+                        </div>
                     </ModalBody> 
                     <ModalFooter>
-                        <Button className="button" variant="solid" colorScheme="#5F2F8B" color="#5F2F8B"
-                                borderRadius="6px" size="sm" onClick={onClose}>
+                        <Button className="button" variant="solid" size="sm" onClick={onClose}>
                             Cerrar
                         </Button>   
                     </ModalFooter>

@@ -1,63 +1,59 @@
 import React, { useState, useContext, useEffect } from 'react'
 
 import firebase from '../../services/FirebaseService';
-import Admin from '../../pages/Admin';
 import LoginForm from './LoginForm';
+import {Redirect} from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
-
 export default function Auth(){
     const [errorMessage, setErrorMessage] = useState("");
-    const {isLogged, setIsLogged} = useContext(AuthContext);
+    const {currentUser} = useContext(AuthContext);
 
     const [form, setForm] = useState({
         email:"",
         password:"",
     })
 
-    useEffect(() => {
-        if(!isLogged){
+    /* useEffect(() => {
+        if(!isAuthenticated){
             setForm({...form, password:""});
         }
-    }, [isLogged])
+    }, [isAuthenticated]) */
 
-    const login = (e) => {
+    const login = async (e) => {
         e.preventDefault();
-        if(form.email===null || form.email==="" || form.password===null || form.password===""){
+        if(!form.email || !form.password){
             setErrorMessage("Usuario o contraseña no válidos. Por favor vuelva a registrarse");
-        }
-        firebase.auth().signInWithEmailAndPassword(form.email,form.password).then(()=>{
-            console.log('Login succesfull');
-        })
+        }else{
+            try{
+                await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+                await firebase.auth().signInWithEmailAndPassword(form.email,form.password);
+            }catch(error){
+                console.error('Login error: ', error);
+            }
+        } 
     }
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) => {
-            if(user){
-                setIsLogged(true);
-            }else{
-                setIsLogged(false);
-            }
-        })
+        console.log('Entra a Login')
+        console.log('LOGIN Current user', currentUser)
     }, [])
+
+    if(currentUser){
+        return <Redirect to={"/"}/>
+    }
 
     const handleChange = (e) => {
         setForm({...form, [e.target.name]:e.target.value});
     }
 
     return (
-        <>
-            {isLogged ? (
-                <Admin/>       
-            ):(
-                <LoginForm 
-                    handleChange={handleChange}
-                    login={login}
-                    errorMessage={errorMessage}
-                    form={form}
-                    />
-            )}
-        </>
+        <LoginForm 
+            handleChange={handleChange}
+            login={login}
+            errorMessage={errorMessage}
+            form={form}
+        />      
     ) 
 }

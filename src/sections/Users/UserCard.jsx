@@ -12,14 +12,15 @@ export default function UserCard({user, deleteUser}) {
 
     return (
         <Tr className="user-row"> 
-            <div className="data-container">
-                <Td>{name}</Td>
-            </div>
-            <div className="tools">
-                <Td><UserDetails user={user}/></Td>
-                <Td><UserEditModal user={user}/></Td>
-                <Td><UserDeleteAlert deleteUser={deleteUser} user={user}/></Td>
-            </div>
+            <Td className="data-container">
+                <p>{name}</p>
+            </Td>
+    
+            <Td className="tools">
+                <UserDetails user={user}/>
+                <UserEditModal user={user}/>
+                <UserDeleteAlert deleteUser={deleteUser} user={user}/>
+            </Td>
         </Tr>
         
     )

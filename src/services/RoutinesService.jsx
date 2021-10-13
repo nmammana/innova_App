@@ -1,6 +1,6 @@
 import firebase from "firebase";
 
-export const getFirebaseRoutines = () =>{
+export const getFirebaseRoutines = async () =>{
     const db = firebase.firestore();
     return db.collection('routines')
     .orderBy('user.name')
@@ -15,4 +15,17 @@ export const getFirebaseRoutines = () =>{
         return items;
     })
 }
+
+const getFirebaseRoutineById = async (routineId) =>{
+    const db = firebase.firestore();
+    return db.collection('routines')
+    .doc(routineId)
+    .get()
+    .then(snapshot => {
+        const routineFetched = snapshot.data();
+        return routineFetched
+    });
+}
+
+
 
