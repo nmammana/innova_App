@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Layout from '../components/Layout'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../sections/Routines/Routines.scss';
 import {
     IconButton,
 } from "@chakra-ui/react"
 import RoutinesList from '../sections/Routines/RoutinesList'
-import { AuthContext } from '../contexts/AuthContext';
 
 export default function Routines() {
     return (
@@ -23,7 +22,7 @@ export default function Routines() {
 
                         <RoutinesList/>
                         
-                        <section>
+                        <section className="bottom-links">
                             <Link to="/" className="link">
                                 <p className="body1 link-text">Volver al menú</p>
                             </Link>

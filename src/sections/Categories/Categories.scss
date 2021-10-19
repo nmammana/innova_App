@@ -8,6 +8,10 @@ $gray2: #5A5555;
 $light-gray: #BAB6B6;
 $gray: #E5E5E5;
 
+.categories-modal__link{
+    cursor: pointer;
+}
+
 .categories-table{
     margin: 0 auto;
     .category-item{

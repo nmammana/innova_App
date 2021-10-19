@@ -1,8 +1,9 @@
 import React , {createContext, useEffect, useState} from 'react'
 
 import firebase from "firebase/app";
+import 'firebase/auth';
+
 import Loading from '../components/Loading/Loading';
-import Layout from '../components/Layout';
 
 export const AuthContext = createContext();
 
@@ -16,7 +17,7 @@ export default function AuthContextProvider({children}) {
             setCurrentUser(user);
             setPending(false)
         });
-    }, [])
+    })
 
     if(pending){
         return <Loading/>  

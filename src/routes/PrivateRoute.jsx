@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import {
     Route,
     Redirect
@@ -8,10 +8,6 @@ import { AuthContext } from '../contexts/AuthContext';
 export default function PrivateRoute({ component: RouteComponent, ...rest }) {
     const {currentUser} = useContext(AuthContext);
 
-    /* useEffect(() => {
-        console.log('private',currentUser)
-    }, []) */
-    
     return (
         <Route
             {...rest}
@@ -26,28 +22,5 @@ export default function PrivateRoute({ component: RouteComponent, ...rest }) {
     )
 }
 
-/* export default function PrivateRoute({ children, ...rest }) {
-    const {currentUser} = useContext(AuthContext);
-
-    return (
-        <Route
-          {...rest}
-          render={
-            ({ location }) => (
-              !!currentUser ? (
-                  children
-                ):(
-                  <Redirect
-                    to={{
-                      pathname: '/login',
-                      state: { from: location }
-                    }}
-                  />
-                )
-            )
-          }
-        />
-      );
-} */
 
 

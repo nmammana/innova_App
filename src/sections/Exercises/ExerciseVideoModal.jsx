@@ -4,7 +4,6 @@ import {
     AspectRatio,
     Button,
     IconButton,
-    
     Modal,
     ModalOverlay,
     ModalContent,
@@ -13,8 +12,6 @@ import {
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    Flex,
-    Box,
     
 } from "@chakra-ui/react"
 

@@ -1,14 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Layout from '../components/Layout'
 import ExercisesList from '../sections/Exercises/ExercisesList'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Categories from '../sections/Categories/Categories'
 import '../sections/Exercises/Exercises.scss'
 import '../assets/icons/coolicons.scss'
 import {
     IconButton,
 } from "@chakra-ui/react"
-import { AuthContext } from '../contexts/AuthContext'
 
 export default function Exercises() {
     return (

@@ -27,7 +27,7 @@ export default function Users() {
                         
                         <UsersList/> 
                         
-                        <section>
+                        <section className="bottom-links">
                             <Link to="/" className="link">
                                 <p className="body1 link-text">Volver al menú</p>
                             </Link>

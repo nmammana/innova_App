@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import {
     Route,
     Redirect
@@ -9,10 +9,6 @@ import { AuthContext } from '../contexts/AuthContext';
 export default function PublicRoute({ component: RouteComponent, ...rest }) {
     const {currentUser} = useContext(AuthContext);
 
-    /* useEffect(() => {
-        console.log('public',currentUser)
-    }, [])
- */
     return (
         <Route
             {...rest}

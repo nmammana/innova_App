@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import {
-
     Button,
-    
     Modal,
     ModalOverlay,
     ModalContent,
@@ -15,8 +13,6 @@ import {
     IconButton,
     FormLabel,
     Input,
-    Flex,
-    Box,
 } from "@chakra-ui/react"
 
 import '../../assets/icons/coolicons.scss'
@@ -28,7 +24,7 @@ export default function EditCategoryModal({name, id, editCategory}) {
    
     useEffect(()=> {
         setNewCategoryName(name);
-    },[]);
+    },[name]);
     
     
     return (
@@ -42,20 +38,16 @@ export default function EditCategoryModal({name, id, editCategory}) {
                 <ModalHeader className="heading2" color="#5F2F8B">Modificar categoría</ModalHeader>
                 <ModalCloseButton className="button" />
                 <ModalBody >
-                    <form className="form">
+                    <form   className="form"
+                            onSubmit = {(e)=>{editCategory(e,id, newCategoryName); onClose();}}>  
                         <div className="input-container">
                             <FormLabel className="form-font form-label">Ingrese el nuevo nombre:</FormLabel>
                             <Input  type= "text" className= "form-input form-font" name="category"
                                     onChange={(e) => setNewCategoryName(e.target.value)} value={newCategoryName}></Input>
                         </div>
-                    </form>
-                </ModalBody> 
-        
-                <ModalFooter>
-                    
+
                         <div className="button-container">
-                            <Button className="button" variant="solid" size="sm"
-                                    onClick={() => {editCategory(id, newCategoryName); onClose()}}>
+                            <Button className="button" type="submit" variant="solid" size="sm">
                                 Guardar cambios
                             </Button>
                         
@@ -63,7 +55,10 @@ export default function EditCategoryModal({name, id, editCategory}) {
                                 Cerrar
                             </Button>
                         </div>
-                   
+                    </form>
+                </ModalBody> 
+        
+                <ModalFooter>
                 </ModalFooter>
             </ModalContent>
         </Modal>

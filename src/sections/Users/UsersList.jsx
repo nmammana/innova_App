@@ -1,19 +1,16 @@
 import React, { useContext, useState } from 'react'
-import firebase from 'firebase';
+
+import firebase from "firebase/app";
+import 'firebase/firestore';
+
 import UserAddModal from './UserAddModal';
 
 import './UsersList.scss';
 
 import {
-    Box,
     Input,
-
     Table,
-    Thead,
     Tbody,
-    Tr,
-    Th,
-    Td,
   } from "@chakra-ui/react"
 import { UsersContext } from '../../contexts/UsersContext';
 import UserCard from './UserCard';
@@ -59,6 +56,8 @@ export default function UsersList() {
                                 return user;
                             }else if(user.name.toLowerCase().includes(searchFilter.toLowerCase())){
                                 return user;
+                            }else{
+                                return false;
                             }
                         }).map((user)=>(
                             <UserCard

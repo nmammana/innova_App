@@ -15,8 +15,8 @@ export default function CategoriesContextProvider({children}) {
         setIsLoadingCategories(false);
     }
     
-    useEffect(async() => {
-        await updateCategories();
+    useEffect(() => {
+        updateCategories();
     }, [])
 
     return (

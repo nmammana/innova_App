@@ -1,8 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 import './Header.scss'
 import { Link } from 'react-router-dom'
-import firebase from '../../services/FirebaseService'
+
+import firebase from "firebase/app";
+import 'firebase/auth';
+
 import logo from '../../assets/images/innova_logo.png'
 import '../../assets/icons/coolicons.scss'
 

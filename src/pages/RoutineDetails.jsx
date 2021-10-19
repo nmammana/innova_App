@@ -28,7 +28,7 @@ export default function UserDetails(props) {
     useEffect(() => {        
         const routine = routines.find(routine => (routine.id === routineId));
         setRoutine(routine);
-    }, [routines])
+    }, [routines, routineId])
 
     return (
         <Layout>

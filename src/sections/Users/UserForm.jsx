@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import firebase from 'firebase';
-import UserCard from './UserCard';
+
+import firebase from "firebase/app";
+import 'firebase/firestore';
 
 import {
     Box,
     Button,
     Input,
     Textarea,
-    FormControl,
     FormLabel,
-    ModalFooter,
   } from "@chakra-ui/react"
 import { UsersContext } from '../../contexts/UsersContext';
 
@@ -26,8 +25,7 @@ export default function UserForm({user, onClose}) {
     })
     const { 
         users, 
-        setUsers,
-        isLoadingUsers, 
+        setUsers, 
         setIsLoadingUsers
     } = useContext(UsersContext);
 
@@ -68,7 +66,7 @@ export default function UserForm({user, onClose}) {
                 email : form.email,
                 identityNumber : form.identityNumber,
                 birth: form.birth,
-                comments: capitalize(form.comments),
+                comments: form.comments,
             })
             let usersListUpdated = [
                 ...users, {
@@ -76,7 +74,7 @@ export default function UserForm({user, onClose}) {
                     email : form.email,
                     identityNumber : form.identityNumber,
                     birth: form.birth,
-                    comments: capitalize(form.comments),
+                    comments: form.comments,
                     id: form.identityNumber
                 }];
             setUsers(usersListUpdated);
@@ -119,7 +117,7 @@ export default function UserForm({user, onClose}) {
         if(user){
             setForm({...user});
         }
-    }, [])
+    },[user])
 
     return (
         <>

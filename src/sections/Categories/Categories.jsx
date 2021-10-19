@@ -1,5 +1,8 @@
 import React, { useContext, useState } from 'react'
-import firebase from 'firebase';
+
+import firebase from "firebase/app";
+import 'firebase/firestore';
+
 import Loading from '../../components/Loading/Loading';
 
 import './Categories.scss';
@@ -11,8 +14,6 @@ import {
     Tbody,
     Tr,
     Td,
-    Container,
-    
     Modal,
     ModalOverlay,
     ModalContent,
@@ -22,8 +23,6 @@ import {
     ModalCloseButton,
     useDisclosure,
     Button,
-    IconButton,
-    Box,
 } from "@chakra-ui/react"
 
 import CategoryEditModal from './CategoryEditModal';
@@ -32,7 +31,7 @@ import { CategoriesContext } from '../../contexts/CategoriesContext';
 import CategoryDeleteAlert from './CategoryDeleteAlert';
 
 export default function Categories() {
-    const [category, setCategory] = useState({});
+    const [category, setCategory] = useState("");
     const db = firebase.firestore();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const {categories, setCategories, isLoadingCategories, setIsLoadingCategories} = useContext(CategoriesContext);
@@ -61,7 +60,8 @@ export default function Categories() {
         setIsLoadingCategories(false);
     }
 
-    const editCategory = async(id, newCategoryName) => {
+    const editCategory = async(e, id, newCategoryName) => {
+        e.preventDefault();
         setIsLoadingCategories(true);
         try{
             await db.collection('categories').doc(id).update({
@@ -98,7 +98,7 @@ export default function Categories() {
         <>
             {categories &&
             <>
-                <a className="link" onClick={onOpen}><p className="body1 link-text">Administrar categorías</p></a>
+                <div className="link categories-modal__link" onClick={onOpen}><p className="body1 link-text">Administrar categorías</p></div>
                 <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />
                     <ModalContent>

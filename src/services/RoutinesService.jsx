@@ -1,4 +1,5 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/firestore';
 
 export const getFirebaseRoutines = async () =>{
     const db = firebase.firestore();
@@ -15,17 +16,3 @@ export const getFirebaseRoutines = async () =>{
         return items;
     })
 }
-
-const getFirebaseRoutineById = async (routineId) =>{
-    const db = firebase.firestore();
-    return db.collection('routines')
-    .doc(routineId)
-    .get()
-    .then(snapshot => {
-        const routineFetched = snapshot.data();
-        return routineFetched
-    });
-}
-
-
-

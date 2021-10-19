@@ -1,18 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import Layout from '../components/Layout';
-import { AuthContext } from '../contexts/AuthContext';
 
 import '../sections/Home/Home.scss';
 
 export default function Home() {
-
-    const {currentUser} = useContext(AuthContext);
-
-    useEffect(() => {
-        console.log('Entra a Home')
-        console.log('LOGIN Current user', currentUser)
-    }, [])
 
     return (
         <Layout>

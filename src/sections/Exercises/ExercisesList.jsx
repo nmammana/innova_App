@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react'
 import ExerciseCard from './ExerciseCard'
 import Loading from '../../components/Loading/Loading';
-import firebase from 'firebase';
+
+import firebase from "firebase/app";
+import 'firebase/firestore';
+
 import './ExercisesList.scss'
 import {    Select,
             Table,
@@ -78,6 +81,8 @@ export default function ExerciseList() {
                                     return exercise;
                                 }else if(exercise.name.toLowerCase().includes(searchFilter.toLowerCase()) && exercise.category.toLowerCase().includes(categoryFilter.toLowerCase())){
                                     return exercise;
+                                }else{
+                                    return false;
                                 }
                             }).map((exercise)=>(
                                 <ExerciseCard

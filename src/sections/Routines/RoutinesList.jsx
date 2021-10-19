@@ -1,23 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
-import firebase from 'firebase';
+import React, { useContext, useState } from 'react'
+
+import firebase from "firebase/app";
+import 'firebase/firestore';
 
 import './RoutinesList.scss';
 import {
-    Box,
     Input,
     Table,
-    Thead,
     Tbody,
-    Tr,
-    Th,
   } from "@chakra-ui/react"
 import { RoutinesContext } from '../../contexts/RoutinesContext';
 import RoutineAddModal from './RoutineAddModal';
 import RoutineCard from './RoutineCard';
 import Loading from '../../components/Loading/Loading';
-import { UsersContext } from '../../contexts/UsersContext';
-import { CategoriesContext } from '../../contexts/CategoriesContext';
-import { ExercisesContext } from '../../contexts/ExercisesContext';
 
 export default function RoutinesList() {
     const db = firebase.firestore();
@@ -62,6 +57,8 @@ export default function RoutinesList() {
                             }else if(routine.user.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
                                 routine.title.toLowerCase().includes(searchFilter.toLowerCase())){
                                 return routine;
+                            }else{
+                                return false;
                             }
                         }).map((routine)=>(
                             <RoutineCard

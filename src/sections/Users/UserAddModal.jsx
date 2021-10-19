@@ -1,20 +1,14 @@
 import React, { useContext } from 'react'
 
 import {
-    Button,
     IconButton,
-
-    
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    Flex,
-    Box,
 } from "@chakra-ui/react"
 import '../../assets/icons/coolicons.scss'
 import UserForm from './UserForm'

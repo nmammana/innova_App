@@ -12,8 +12,6 @@ import {
     IconButton,
     AlertDialogCloseButton,
     Button,
-    Box,
-    
 } from "@chakra-ui/react"
 
 export default function UserDeleteAlert({deleteUser, user}) {

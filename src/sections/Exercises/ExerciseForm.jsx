@@ -1,18 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import Loading from '../../components/Loading/Loading'
-import firebase from 'firebase'
-import Creatable from 'react-select/creatable';
+import firebase from "firebase/app";
+import 'firebase/firestore';
 
+import Creatable from 'react-select/creatable';
 import {   
     FormLabel,
     Input,
     Button,
     Flex,
-    Box,
 } from "@chakra-ui/react"
-import { ExercisesContext } from '../../contexts/ExercisesContext'
+import Loading from '../../components/Loading/Loading'
 import ExerciseVideoModal from './ExerciseVideoModal'
+import { ExercisesContext } from '../../contexts/ExercisesContext'
 import { CategoriesContext } from '../../contexts/CategoriesContext';
 
 
@@ -160,7 +160,7 @@ export default function ExerciseForm({onClose, exercise}) {
 
     const chargeOptions = (categories) => {
         let items = []; 
-        categories.map((category) => {
+        categories.forEach((category) => {
             items.push({
                 label: category.name,
                 value: category.name.toLowerCase().replace(/\W/g, ''),
@@ -169,7 +169,7 @@ export default function ExerciseForm({onClose, exercise}) {
         return items;
     }
 
-    useEffect(async ()=> {
+    useEffect(()=> {
         const options = chargeOptions(categories);
         setOptions(options);
         if(exercise){
@@ -179,7 +179,7 @@ export default function ExerciseForm({onClose, exercise}) {
                 value: exercise.category.toLowerCase().replace(/\W/g, ''),
             })
         }
-    },[categories]);
+    },[categories, exercise]);
 
     return (
         <>

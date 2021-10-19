@@ -7,7 +7,10 @@ import {
     Button,
     Textarea,
 } from "@chakra-ui/react"
-import firebase from 'firebase'
+
+import firebase from "firebase/app";
+import 'firebase/firestore';
+
 import { ExercisesContext } from '../../contexts/ExercisesContext';
 import ExerciseVideoModal from '../Exercises/ExerciseVideoModal';
 import RoutineExerciseCard from './RoutineExerciseCard';
@@ -24,7 +27,7 @@ export default function RoutineForm({onClose, routine}) {
     const {users} = useContext(UsersContext);
     const {exercises} = useContext(ExercisesContext);
     const {categories} = useContext(CategoriesContext);
-    const {routines, setRoutines, isLoadingRoutines, setIsLoadingRoutines} = useContext(RoutinesContext);
+    const {routines, setRoutines, setIsLoadingRoutines} = useContext(RoutinesContext);
     const {isLoadingUsers} = useContext(UsersContext);
     const {isLoadingCategories} = useContext(CategoriesContext);
     const {isLoadingExercises} = useContext(ExercisesContext);
@@ -90,7 +93,6 @@ export default function RoutineForm({onClose, routine}) {
     }
 
     const handleChange = (e, action) =>{
-        
         if(!e){
             if(action.name==="user"){
                 setUserValue("");
@@ -102,14 +104,14 @@ export default function RoutineForm({onClose, routine}) {
             }
         }else if(e.label){
             if(action.name === 'user'){
-                users.filter((user) => {
+                users.forEach((user) => {
                     if(user.name.toLowerCase().includes(e.label.toLowerCase())){
                         setForm({...form, [action.name]: user});
                     }
                 })
                 setUserValue(e);
             }else if(action.name === 'exercise'){
-                exercises.filter((exercise) => {
+                exercises.forEach((exercise) => {
                     if(exercise.name.toLowerCase().includes(e.label.toLowerCase())){
                         setExerciseSelected({exerciseSelected, [action.name]: exercise});
                     }
@@ -119,23 +121,9 @@ export default function RoutineForm({onClose, routine}) {
                 setCategorySelected(e.value);
                 setCategoryValue(e);
             }
-        }/* else if(e.target.name === 'user'){
-            users.filter((user) => {
-                if(user.name === e.target.value){
-                    setForm({...form, [e.target.name]: user});
-                }
-            })
-        }else if(e.target.name === 'exercise'){
-            exercises.filter((exercise) => {
-                if(exercise.name === e.target.value){
-                    setExerciseSelected({...exerciseSelected, [e.target.name]:exercise});
-                }
-            })
-        } */else if(e.target.name === 'exerciseComments'){
+        }else if(e.target.name === 'exerciseComments'){
             setExerciseSelected({...exerciseSelected, comments: e.target.value});
-        }/* else if(e.target.name === 'category'){
-            setCategorySelected(e.target.value);
-        } */else{
+        }else{
             setForm({...form, [e.target.name]: e.target.value});
         }
     }
@@ -143,9 +131,9 @@ export default function RoutineForm({onClose, routine}) {
     const addExerciseToDay = () => {
         let dayExercises = [];
         if(day.exercises){
-            day.exercises.map(exercise => {
+            day.exercises.map(exercise => (
                 dayExercises.push(exercise)
-            })
+            ))
         }
         dayExercises.push(exerciseSelected);
         setDay({...day, exercises: dayExercises, });
@@ -162,7 +150,7 @@ export default function RoutineForm({onClose, routine}) {
     const addDayToRoutine = () => {
         let days = [];
         if(form.days){
-            form.days.map(day => {
+            form.days.forEach(day => {
                 days.push(day)
             }) 
         }
@@ -179,23 +167,21 @@ export default function RoutineForm({onClose, routine}) {
     const deleteDay = (dayName) => {
         let daysUpdated = [];
         let dayCounter=1;
-        form.days.filter(day => {
+        form.days.forEach(day => {
             if(day.dayName !== dayName){
                 daysUpdated.push(day);
-               //
             }
         })
-        daysUpdated.map((day) => {
+        daysUpdated.forEach((day) => {
             day.dayName = `Dia ${dayCounter}`;
             dayCounter += 1;
         })
-        
         setForm({...form, days: daysUpdated});
     } 
 
     const deleteExerciseFromDay = (exerciseDeleted) => {
         let updatedExercises = [];
-        day.exercises.filter(exercise => {
+        day.exercises.forEach(exercise => {
             if(exercise !== exerciseDeleted){
                 updatedExercises.push(exercise);
             }
@@ -276,7 +262,7 @@ export default function RoutineForm({onClose, routine}) {
 
     const chargeOptions = (options) => {
         let items = []; 
-        options.map((option) => {
+        options.forEach((option) => {
             items.push({
                 label: option.name,
                 value: option.name.toLowerCase().replace(/\W/g, ''),
@@ -285,11 +271,11 @@ export default function RoutineForm({onClose, routine}) {
         return items;
     }
 
-    useEffect(async ()=> {
+    useEffect(()=> {
         const categoriesOptions = chargeOptions(categories);
         setCategoriesOptions(categoriesOptions);
         let exercisesFiltered = [];
-        exercises.filter(exercise => {
+        exercises.forEach(exercise => {
             if(categorySelected===""){
                 exercisesFiltered.push(exercise);
             }else if(exercise.category.toLowerCase().includes(categorySelected.toLowerCase())){
@@ -309,12 +295,11 @@ export default function RoutineForm({onClose, routine}) {
                 value: routine.user.name.toLowerCase().replace(/\W/g, ''),
             })
         }
-    },[categories, categorySelected, exercises, users]);
+    },[categories, categorySelected, exercises, users, routine]);
 
     useEffect(() => {
         setDay({...day, dayName: `Día ${form.days.length+1}`});
     }, [form.days])
-
 
     return (
         <form 

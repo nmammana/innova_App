@@ -1,6 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 
 import firebase from '../../services/FirebaseService';
+
 import LoginForm from './LoginForm';
 import {Redirect} from 'react-router-dom';
 
@@ -15,12 +16,6 @@ export default function Auth(){
         password:"",
     })
 
-    /* useEffect(() => {
-        if(!isAuthenticated){
-            setForm({...form, password:""});
-        }
-    }, [isAuthenticated]) */
-
     const login = async (e) => {
         e.preventDefault();
         if(!form.email || !form.password){
@@ -34,11 +29,6 @@ export default function Auth(){
             }
         } 
     }
-
-    useEffect(() => {
-        console.log('Entra a Login')
-        console.log('LOGIN Current user', currentUser)
-    }, [])
 
     if(currentUser){
         return <Redirect to={"/"}/>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { Suspense } from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Login from './pages/Login';
 import Error404 from './pages/Error404';
@@ -23,7 +23,7 @@ import AuthContextProvider from './contexts/AuthContext';
 import Loading from './components/Loading/Loading';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import ProtectedRoutes from './routes/ProtectedRoutes';
+
 
 export default function App() {
 

@@ -11,7 +11,6 @@ import {
     Button,
     FormLabel,
     Input,
-    Box,
 } from "@chakra-ui/react"
 
 export default function AddCategoryModal({handleChange, category, createCategory}) {
